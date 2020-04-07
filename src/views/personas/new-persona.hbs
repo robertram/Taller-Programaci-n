@@ -1,0 +1,123 @@
+<div class="containerInfo">
+  <div class="container" style="margin-top: 8%;">
+    <div class="row">
+      <div class="col-10">
+        <h2 class="text">Personas</h2>
+        <form action="/personas/new-persona" method="POST" class="needs-validation" novalidate>
+          <div class="form-row" style="margin-top: 5%;">
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">DNI</label>
+              <input name="dni" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom02">Nombre</label>
+              <input name="nombre" type="text" class="form-control" id="validationCustom02" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="validationCustomUsername">Direccion</label>
+              <div class="input-group">
+                <input name="direccion" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+              </div>
+            </div>
+          </div>
+          <h4>Socio</h4>
+          <div class="form-row" style="margin-top: 5%;">
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">DNI Socio</label>
+              <input name="dnisocio" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+          </div>
+
+          <h4>Barco</h4>
+          <div class="form-row" style="margin-top: 5%;">
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">Matricula</label>
+              <input name="matricula" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">Nombre</label>
+              <input name="nombre" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">Amarre</label>
+              <input name="amarre" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="validationCustom01">Cuota</label>
+              <input name="cuota" type="number" class="form-control" id="validationCustom01" required>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Agregar</button>
+        </form>
+
+        <table class="table" style="margin-top: 10%;">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Dni</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Direccion</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each personas}}
+            <tr>
+              <td>{{ this.dni }}</td>
+              <td>{{ this.nombre }}</td>
+              <td>{{ this.direccion }}</td>
+              <td class="btn btn-warning button-form" type="submit"><a href="/productos/edit/{{_id}}">Modificar</a></td>
+              <!--<td class="btn btn-danger button-form" type="submit"><a href="/productos/delete/{{_id}}">Eliminar</a></td>
+              -->
+              <form action="/productos/delete/{{_id}}?_method=DELETE" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <td class="btn btn-danger button-form" type="submit">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class=" btn-danger button-form">Delete</button>
+                </td>
+              </form> 
+
+              <!--<form action="/notes/delete/{{_id}}?_method=DELETE" method="POST"
+                enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger btn-block btn-sm">Delete</button>
+              </form>-->
+            </tr>
+            {{else}}
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="card mx-auto">
+            <div class="card-body">
+              <h1>Hola {{user.name}}</h1>
+              <p clsss="lead">Aún no hay personas creadas</p>
+              <a class="btn btn-success btn-block">Crea Uno!</a>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <script>
+          // Example starter JavaScript for disabling form submissions if there are invalid fields
+          (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+            }, false);
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

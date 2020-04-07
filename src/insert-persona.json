@@ -1,0 +1,30 @@
+[
+{
+    "dni": 13213, 
+    "nombre":"Robert", 
+    "direccion": "San José", 
+    "socio":
+    {
+        "dnisocio": 13213, 
+        "barco":
+        {
+            "matricula": 1111, 
+            "dnisocio": 13213, 
+            "nombre": "Robert",
+            "amarre":"1100",  
+            "cuota":"1111",
+            "patrón":
+            {
+                "dnipatron":13213,
+                "salida":
+                {
+                    "matricula": 1111, 
+                    "fecha": "12/01/2019", 
+                    "destino": "Bocas del Toro", 
+                    "dnipatron": 13213
+                }
+            }
+        }
+    }
+}
+]
