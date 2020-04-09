@@ -3,53 +3,76 @@
     <div class="row">
       <div class="col-10">
         <h2 class="text">Personas</h2>
-        <form action="/personas/new-persona" method="POST" class="needs-validation" novalidate>
+        <form action="/personas/new-persona" method="POST" class="needs-validation">
           <div class="form-row" style="margin-top: 5%;">
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">DNI</label>
-              <input name="dni" type="number" class="form-control" id="validationCustom01" required>
+              <input name="dni" type="number" class="form-control" id="validationCustom01">
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationCustom02">Nombre</label>
-              <input name="nombre" type="text" class="form-control" id="validationCustom02" required>
+              <input name="nombre" type="text" class="form-control" id="validationCustom02">
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-4 mb-3">
               <label for="validationCustomUsername">Direccion</label>
               <div class="input-group">
-                <input name="direccion" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                <input name="direccion" type="text" class="form-control" id="validationCustomUsername"
+                  aria-describedby="inputGroupPrepend">
               </div>
             </div>
           </div>
           <h4>Socio</h4>
           <div class="form-row" style="margin-top: 5%;">
-            <div class="col-md-4 mb-3">
-              <label for="validationCustom01">DNI Socio</label>
-              <input name="dnisocio" type="number" class="form-control" id="validationCustom01" required>
+            <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" name="socio" type="radio"
+                    value="yes">Si</label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" name="socio" type="radio"
+                    value="no">No</label>
+              </div>
             </div>
           </div>
+
+           <h4>Patrón</h4>
+          <div class="form-row" style="margin-top: 5%;">
+            <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" name="socio" type="radio"
+                    value="yes">Si</label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label"><input class="form-check-input" name="socio" type="radio"
+                    value="no">No</label>
+              </div>
+            </div>
+          </div>
+          
 
           <h4>Barco</h4>
           <div class="form-row" style="margin-top: 5%;">
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">Matricula</label>
-              <input name="matricula" type="number" class="form-control" id="validationCustom01" required>
+              <input name="matricula" type="number" class="form-control" id="validationCustom01">
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">Nombre</label>
-              <input name="nombre" type="number" class="form-control" id="validationCustom01" required>
+              <input name="nombre" type="text" class="form-control" id="validationCustom01">
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">Amarre</label>
-              <input name="amarre" type="number" class="form-control" id="validationCustom01" required>
+              <input name="amarre" type="text" class="form-control" id="validationCustom01">
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationCustom01">Cuota</label>
-              <input name="cuota" type="number" class="form-control" id="validationCustom01" required>
+              <input name="cuota" type="text  " class="form-control" id="validationCustom01">
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">Agregar</button>
+
+          
         </form>
 
         <table class="table" style="margin-top: 10%;">
@@ -66,22 +89,6 @@
               <td>{{ this.dni }}</td>
               <td>{{ this.nombre }}</td>
               <td>{{ this.direccion }}</td>
-              <td class="btn btn-warning button-form" type="submit"><a href="/productos/edit/{{_id}}">Modificar</a></td>
-              <!--<td class="btn btn-danger button-form" type="submit"><a href="/productos/delete/{{_id}}">Eliminar</a></td>
-              -->
-              <form action="/productos/delete/{{_id}}?_method=DELETE" method="POST"
-                enctype="application/x-www-form-urlencoded">
-                <td class="btn btn-danger button-form" type="submit">
-                  <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit" class=" btn-danger button-form">Delete</button>
-                </td>
-              </form> 
-
-              <!--<form action="/notes/delete/{{_id}}?_method=DELETE" method="POST"
-                enctype="application/x-www-form-urlencoded">
-                <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="btn btn-danger btn-block btn-sm">Delete</button>
-              </form>-->
             </tr>
             {{else}}
           </tbody>
@@ -89,9 +96,9 @@
         <div class="row">
           <div class="card mx-auto">
             <div class="card-body">
-              <h1>Hola {{user.name}}</h1>
+              <h1>Hola </h1>
               <p clsss="lead">Aún no hay personas creadas</p>
-              <a class="btn btn-success btn-block">Crea Uno!</a>
+              <a class="btn btn-success btn-block">Crea Una!</a>
             </div>
           </div>
           {{/each}}
@@ -116,6 +123,20 @@
             }, false);
           })();
         </script>
+        <script>
+            var socio = document.getElementsByName('socio');
+
+            for (var i = 0, length = socio.length; i < length; i++) {
+              if (socio[i].checked) {
+                // do whatever you want with the checked radio
+                console.log(socio[i].value);
+                alert(socio[i].value);
+
+                // only one radio can be logically checked, don't check the rest
+                break;
+              }
+            }
+          </script>
       </div>
     </div>
   </div>

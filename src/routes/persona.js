@@ -7,11 +7,19 @@ const Persona = require('../models/Persona');
 
 
 router.get('/personas', async (req, res) => {
-    const personas = await Persona.find().sort([
-        ['updatedAt', 'descending']
-    ]);
+    const personas = await Persona.find();
+    console.log('Objeto de personas: ', personas);
 
     res.render('personas/new-persona', {
+        personas
+    });
+});
+
+router.get('/personas-data', async (req, res) => {
+    const personas = await Persona.find();
+    console.log('Objeto de personas: ', personas);
+
+    res.send({
         personas
     });
 });
@@ -21,24 +29,38 @@ router.post('/personas/new-persona', async (req, res) => {
         dni,
         nombre,
         direccion
+        /*, 
+                matricula, 
+                amarre,
+                cuota,
+                fecha, 
+                hora, 
+                destino*/
     } = req.body;
     const errors = [];
 
     if (errors.length > 0) {
         res.render("personas/new-persona", {
-            errors, //No se quita
+            errors,
             dni,
             nombre,
             direccion
         });
     } else {
+        const dd = dni;
 
         const newPersona = new Persona({
             dni,
             nombre,
             direccion,
-            Socio: [dni,{}]
+            Socio: [dd]
+            /*,
+            Patron: [dd], 
+            Barco: [matricula, dni, nombre, amarre, cuota], 
+            Salida: [matricula, fecha, hora, destino, dni]*/
         });
+
+
         console.log("Persona " + newPersona)
         //newProducto.user = req.user.id;
         await newPersona.save();

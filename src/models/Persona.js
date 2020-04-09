@@ -1,34 +1,45 @@
-const {Schema, model} = require('mongoose');
+const {
+    Schema,
+    model
+} = require('mongoose');
+
 
 const SalidaSchema = new Schema({
-    fecha:Number, 
-    hora:String, //Date
-    destino:String
+    fecha: Number,
+    hora: String, //Date
+    destino: String
 })
 
-const PatrónSchema = new Schema({
-    dnipatron:Number, 
-    Salida:[SalidaSchema]
+const PatronSchema = new Schema({
+    dnipatron: Number
 })
 
 const BarcoSchema = new Schema({
-    matricula:Number, 
-    nombre:String, 
-    amarre:String, 
-    cuota:String, 
-    Patrón: [PatrónSchema]
+    matricula: Number,
+    nombreBarco: String,
+    amarre: String,
+    cuota: String
 })
 
 const SocioSchema = new Schema({
-    dnisocio:Number, 
-    Barco:[BarcoSchema]
+    dnisocio: Number
 })
+//const socioModel = mongoose.model('socio', SocioSchema)
 
 const PersonaSchema = new Schema({
-    dni:Number, 
-    nombre:String, 
-    direccion:String, 
-    Socio:[SocioSchema]
+    dni: Number,
+    nombre: String,
+    direccion: String,
+    Socio: [{type: Schema.Types.ObjectId, ref:'socio'}],
+    /*Patron: [PatronSchema],
+    Barco: [BarcoSchema],
+    Salida: [SalidaSchema]*/
 })
 
-module.exports = model('Persona',PersonaSchema)
+/*const PersonaModel= mongoose.model('persona', PersonaSchema)
+
+const aPersona= new PersonaModel({dni: 1234, nombre:'Juana', direccion:'Puntarenas'});
+
+aPersona.save();*/
+
+module.exports = model('Persona', PersonaSchema)
